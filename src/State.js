@@ -23,8 +23,8 @@ class State extends Component {
 				<br />
 				<select onChange={this.onChange} defaultValue=''>
 					<option value=''>State</option>
-					<option value='/MNHome'>Minnesota</option>
-					<option value='/NDHome'>North Dakota</option>
+					<option value='/MN'>Minnesota</option>
+					<option value='/ND'>North Dakota</option>
 				</select>
 				<br />
 				<br />

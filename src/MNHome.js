@@ -19,10 +19,10 @@ class MNHome extends Component {
 
 		return (
 			<div>
-				<select onChange={this.onChange} defaultValue='/MNHome' >
+				<select onChange={this.onChange} defaultValue='/MN' >
 					<option value=''>State</option>
-					<option value='/MNHome' defaultValue>Minnesota</option>
-					<option value='/NDHome'>North Dakota</option>
+					<option value='/MN' defaultValue>Minnesota</option>
+					<option value='/ND'>North Dakota</option>
 				</select>
 
 				<h2>HELLO</h2>

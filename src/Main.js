@@ -16,8 +16,8 @@ class Main extends Component {
 
 					<div>
 						<Route exact path='/' component={State} />
-						<Route path='/MNHome' component={MNHome} />
-						<Route path='/NDHome' component={NDHome} />
+						<Route path='/MN' component={MNHome} />
+						<Route path='/ND' component={NDHome} />
 					</div>
 
 					<a target='_blank' rel='noopener noreferrer' href='http://www.ugpti.org/dotsc/' >
