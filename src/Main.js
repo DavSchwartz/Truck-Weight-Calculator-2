@@ -1,13 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
 	Route,
 	HashRouter
 } from 'react-router-dom';
-import MNHome from './MNHome';
-import NDHome from './NDHome';
-import State from './State';
 
-class Main extends Component {
+import State from './State';
+import MNHome from './Minnesota/MNHome';
+import MNContact from './Minnesota/MNContact';
+import MNInput from './Minnesota/MNInput';
+import MNCalculations from './Minnesota/MNCalculations';
+import NDHome from './NorthDakota/NDHome';
+import NDContact from './NorthDakota/NDContact';
+import NDInput from './NorthDakota/NDInput';
+import NDCalculations from './NorthDakota/NDCalculations';
+
+class Main extends React.Component {
 	render() {
 		return (
 			<HashRouter>
@@ -17,10 +24,16 @@ class Main extends Component {
 					<div>
 						<Route exact path='/' component={State} />
 						<Route path='/MN' component={MNHome} />
+						<Route path='/MNContact' component={MNContact} />
+						<Route path='/MNInput' component={MNInput} />
+						<Route path='/MNCalculations' component={MNCalculations} />
 						<Route path='/ND' component={NDHome} />
+						<Route path='/NDContact' component={NDContact} />
+						<Route path='/NDInput' component={NDInput} />
+						<Route path='/NDCalculation' component={NDCalculations} />
 					</div>
 
-					<a target='_blank' rel='noopener noreferrer' href='http://www.ugpti.org/dotsc/' >
+					<a href='http://www.ugpti.org/dotsc/' >
 						<img alt='UGPTI-DOTSC Footer' src={window.location.origin + '/img/logo_DOTSC.jpg'} style={{ width: '60%' }} />
 					</ a>
 				</div>

@@ -1,15 +1,27 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Redirect } from 'react-router-dom'
 
-class State extends Component {
+class State extends React.Component {
+	render() {
+		return (
+			<div>
+				<h2>Please Select a State</h2>
+				<RedirectDropDown />
+			</div>
+		);
+	}
+}
+
+
+class RedirectDropDown extends React.Component {
 	constructor(props) {
 		super(props);
 		this.onChange = this.onChange.bind(this);
-		this.state = { redirect: false, location: '/' }
+		this.state = { redirect : false, location : '/' }
 	}
 
 	onChange(event) {
-		this.setState({ location: event.target.value, redirect: true });
+		this.setState({location: event.target.value, redirect : true});
 	}
 
 	render() {
@@ -18,19 +30,11 @@ class State extends Component {
 		}
 
 		return (
-			<div>
-				<h2>Please Select a State</h2>
-				<br />
 				<select onChange={this.onChange} defaultValue=''>
 					<option value=''>State</option>
 					<option value='/MN'>Minnesota</option>
 					<option value='/ND'>North Dakota</option>
 				</select>
-				<br />
-				<br />
-				<br />
-				<br />
-			</div>
 		);
 	}
 }
