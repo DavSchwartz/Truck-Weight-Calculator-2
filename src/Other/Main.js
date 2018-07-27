@@ -4,22 +4,24 @@ import {
 	HashRouter
 } from 'react-router-dom';
 
-import State from './State';
-import MNHome from './Minnesota/MNHome';
-import MNContact from './Minnesota/MNContact';
-import MNInput from './Minnesota/MNInput';
-import MNCalculations from './Minnesota/MNCalculations';
-import NDHome from './NorthDakota/NDHome';
-import NDContact from './NorthDakota/NDContact';
-import NDInput from './NorthDakota/NDInput';
-import NDCalculations from './NorthDakota/NDCalculations';
+import State from '../Other/State';
+import MNHome from '../Minnesota/MNHome';
+import MNContact from '../Minnesota/MNContact';
+import MNInput from '../Minnesota/MNInput';
+import MNCalculations from '../Minnesota/MNCalculations';
+import NDHome from '../NorthDakota/NDHome';
+import NDContact from '../NorthDakota/NDContact';
+import NDInput from '../NorthDakota/NDInput';
+import NDCalculations from '../NorthDakota/NDCalculations';
+
+import './CSS/Main.css';
 
 class Main extends React.Component {
 	render() {
 		return (
 			<HashRouter>
 				<div>
-					<img alt='UGPTI-DOTSC Header' src={window.location.origin + '/img/Spliced-Website-Header-(UGPTI).png'} style={{ width: '100%' }} />
+					<img className='header' alt='UGPTI-DOTSC Header' src={window.location.origin + '/img/Spliced-Website-Header-(UGPTI).png'} />
 
 					<div>
 						<Route exact path='/' component={State} />
@@ -34,7 +36,7 @@ class Main extends React.Component {
 					</div>
 
 					<a href='http://www.ugpti.org/dotsc/' >
-						<img alt='UGPTI-DOTSC Footer' src={window.location.origin + '/img/logo_DOTSC.jpg'} style={{ width: '60%' }} />
+						<img className='footer' alt='UGPTI-DOTSC Footer' src={window.location.origin + '/img/logo_DOTSC.jpg'} />
 					</ a>
 				</div>
 			</HashRouter>

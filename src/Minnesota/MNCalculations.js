@@ -1,4 +1,5 @@
 import React from 'react';
+import './CSS/MNCalculations.css';
 
 class MNCalculations extends React.Component {
 	render() {

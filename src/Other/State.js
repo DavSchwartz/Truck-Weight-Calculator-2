@@ -1,5 +1,6 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
+import './CSS/State.css';
 
 class State extends React.Component {
 	render() {
@@ -12,7 +13,7 @@ class State extends React.Component {
 	}
 }
 
-
+//state selection drop down to redirect
 class RedirectDropDown extends React.Component {
 	constructor(props) {
 		super(props);
@@ -20,12 +21,12 @@ class RedirectDropDown extends React.Component {
 		this.state = { redirect : false, location : '/' }
 	}
 
-	onChange(event) {
+	onChange(event) { // set value for redirect
 		this.setState({location: event.target.value, redirect : true});
 	}
 
 	render() {
-		if (this.state.redirect) {
+		if (this.state.redirect) { // redirect to chosen option
 			return <Redirect to={this.state.location} />;
 		}
 
