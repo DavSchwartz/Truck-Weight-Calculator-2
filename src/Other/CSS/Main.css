@@ -2,6 +2,11 @@
 	width: 100%;
 }
 
+.body {
+	margin: 0 0 100px; /* TODO is there a better way to make a sticky footer? */
+}
+
 .footer {
 	width: 60%;
+	height: 100px; /* TODO is there a better way to make a sticky footer? */
 }

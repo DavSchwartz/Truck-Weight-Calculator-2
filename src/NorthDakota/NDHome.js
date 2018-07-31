@@ -110,7 +110,7 @@ class Modal extends React.Component {
 		};
 		return (
 			<span>
-				<span className='axleRatingLink' onClick={this.handleClick}>{this.props.children}</span>
+				<span className='link' onClick={this.handleClick}>{this.props.children}</span>
 
 				<span className="modal" style={styles.modalStyle}>
 

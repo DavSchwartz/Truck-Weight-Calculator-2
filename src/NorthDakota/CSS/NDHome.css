@@ -5,13 +5,13 @@ img {
 
 /***** MODAL STYLES *****/
 /* style text to look like a link */
-.axleRatingLink {
+.link {
 	cursor: pointer;
 	color: blue;
 	text-decoration:underline;
 	transition: 0.3s;
 }
-.axleRatingLink:hover {
+.link:hover {
 	text-decoration:none;
 	text-shadow: 1px 1px 1px #555;
 }

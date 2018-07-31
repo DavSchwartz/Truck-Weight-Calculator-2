@@ -23,7 +23,7 @@ class Main extends React.Component {
 				<div>
 					<img className='header' alt='UGPTI-DOTSC Header' src={window.location.origin + '/img/Spliced-Website-Header-(UGPTI).png'} />
 
-					<div>
+					<div className='body'>
 						<Route exact path='/' component={State} />
 						<Route path='/MN' component={MNHome} />
 						<Route path='/MNContact' component={MNContact} />

@@ -1,26 +1,35 @@
-.title {
-	padding-left: 20%;
-}
-
-.row-container {
+.flexRowMainContent {
 	display: flex;
 }
 
-.item {
-	padding: 5px 25px 5px 25px;
-	width: 90px;
+.flexRowInput {
+	display: flex;
 }
 
+.flexItemAxleNum {
+	padding: 5px 0px 5px 0px;
+	width: 120px;
+}
+
+.flexItemAxleDetails {
+	padding: 5px 0px 5px 0px;
+	width: 80px;
+}
+
+input {
+	width: 45px;
+}
 
 /***** MODAL STYLES *****/
 /* style text to look like a link */
-.axleRatingLink {
+.link {
 	cursor: pointer;
 	color: blue;
+	font-weight: bold;
 	text-decoration:underline;
 	transition: 0.3s;
 }
-.axleRatingLink:hover {
+.link:hover {
 	text-decoration:none;
 	text-shadow: 1px 1px 1px #555;
 }
