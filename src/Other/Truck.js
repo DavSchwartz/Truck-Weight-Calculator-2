@@ -1,8 +1,11 @@
-class Truck {
-
-	constructor(numAxles) {
-		this.numAxles = numAxles;
-	}
+class Truck{
+constructor(restriction, axleCount, is10Ton, is9Ton, isRestricted) {
+	this.restriction = restriction;
+	this.axleCount = axleCount;
+	this.is10Ton = is10Ton;
+	this.is9Ton = is9Ton;
+	this.isRestricted = isRestricted;
+}	
 
 	/*
 	//OLD C# TRUCK VARIABLES
