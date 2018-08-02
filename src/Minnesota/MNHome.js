@@ -19,7 +19,7 @@ class MNHome extends React.Component {
 function Resources() {
 	return (
 		<div>
-			<span class="collapsibleTree">Resources</span> <Link to='/MNContact'>Contact Us</Link>	
+			<span className="collapsibleTree">Resources</span> <Link to='/MNContact'>Contact Us</Link>	
 				<ul>
 				<li><a href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>good stuff</a></li>
 			</ul>

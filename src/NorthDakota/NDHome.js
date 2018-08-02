@@ -19,7 +19,7 @@ class NDHome extends React.Component {
 function Resources() {
 	return (
 		<div>
-			<span class="collapsibleTree">Resources</span> <Link class="contactUs" to='/NDContact'>Contact Us</Link>	
+			<span className="collapsibleTree">Resources</span> <Link class="contactUs" to='/NDContact'>Contact Us</Link>	
 				<ul>
 				<li><a href='http://www.ndltap.org/resources/truckweight.php'>NLDTAP Truck Weight Resources</a></li>
 				<li><a href='http://www.nd.gov/ndhp/motor-carrier/legal-vehicle-size-and-weight'>NDHP Vehicle Size and Weight</a></li>

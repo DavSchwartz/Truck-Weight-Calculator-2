@@ -1,11 +1,18 @@
 class Truck{
-constructor(restriction, axleCount, is10Ton, is9Ton, isRestricted) {
-	this.restriction = restriction;
-	this.axleCount = axleCount;
-	this.is10Ton = is10Ton;
-	this.is9Ton = is9Ton;
-	this.isRestricted = isRestricted;
-}	
+	constructor() {
+		this.restriction = 'No Restriction';
+		this.axleCount = 5;
+		this.is10Ton = true;
+		this.is9Ton = true;
+		this.isRestricted = false;
+		this.feet = [0, 8, 8, 8, 8, 8, 8, 8];
+		this.inches = [0, 0, 0, 0, 0, 0, 0, 0];
+		this.tireCount = [2, 4, 4, 4, 4, 4, 4, 4];
+		this.tireWidth = [11, 11, 11, 11, 11, 11, 11, 11];;
+		this.tireRating = [20000, 20000, 20000, 20000, 20000, 20000, 20000, 20000];
+		this.weightUnit = ['lbs.', 'lbs.', 'lbs.', 'lbs.', 'lbs.', 'lbs.', 'lbs.', 'lbs.'];
+		this.steerable = ['Yes', 'No', 'No', 'No', 'No', 'No', 'No', 'No'];
+	}	
 
 	/*
 	//OLD C# TRUCK VARIABLES
