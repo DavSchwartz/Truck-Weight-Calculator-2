@@ -21,7 +21,7 @@ class Main extends React.Component {
 		return (
 			<HashRouter>
 				<div>
-					<img className='header' alt='UGPTI-DOTSC Header' src={window.location.origin + '/img/Spliced-Website-Header-(UGPTI).png'} />
+					<img className='header' alt='UGPTI-DOTSC Header' src={'img/Spliced-Website-Header-(UGPTI).png'} />
 
 					<div className='body'>
 						<Route exact path='/' component={State} />
@@ -36,7 +36,7 @@ class Main extends React.Component {
 					</div>
 
 					<a href='http://www.ugpti.org/dotsc/' >
-						<img className='footer' alt='UGPTI-DOTSC Footer' src={window.location.origin + '/img/logo_DOTSC.jpg'} />
+						<img className='footer' alt='UGPTI-DOTSC Footer' src={'img/logo_DOTSC.jpg'} />
 					</ a>
 				</div>
 			</HashRouter>

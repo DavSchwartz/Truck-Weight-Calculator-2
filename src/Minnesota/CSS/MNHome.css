@@ -1,0 +1,32 @@
+.flexRow {
+	display: flex;
+}
+
+.flexItem {
+	margin: 10px 60px 30px 20px;
+	padding: 10px 10px;
+}
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+	text-decoration: underline;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #FECD08;
+	min-width: 70px;
+	padding: 0px 10px;
+	z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+.dropdown:hover {
+	background-color: #004511; /* NDSU colors! */
+	color: #FECD08;
+}

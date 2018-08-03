@@ -18,14 +18,17 @@ class NDHome extends React.Component {
 //informational links
 function Resources() {
 	return (
-		<div>
-			<span className="collapsibleTree">Resources</span> <Link class="contactUs" to='/NDContact'>Contact Us</Link>	
-				<ul>
-				<li><a href='http://www.ndltap.org/resources/truckweight.php'>NLDTAP Truck Weight Resources</a></li>
-				<li><a href='http://www.nd.gov/ndhp/motor-carrier/legal-vehicle-size-and-weight'>NDHP Vehicle Size and Weight</a></li>
-				<li><a href='http://www.dot.nd.gov/business/motor-carrier.htm'>NDDOT Motor Carrier Services</a></li>
-				<li><a href='http://www.ugpti.org'>UGPTI</a></li>
-			</ul>
+		<div class='flexRow'>
+			<div className="dropdown flexItem">
+				<span>Resources</span>
+					<div className='dropdown-content'>
+						<p><a href='http://www.ndltap.org/resources/truckweight.php'>NLDTAP Truck Weight Resources</a></p>
+						<p><a href='http://www.nd.gov/ndhp/motor-carrier/legal-vehicle-size-and-weight'>NDHP Vehicle Size and Weight</a></p>
+						<p><a href='http://www.dot.nd.gov/business/motor-carrier.htm'>NDDOT Motor Carrier Services</a></p>
+						<p><a href='http://www.ugpti.org'>UGPTI</a></p>
+					</div>
+			</div>
+			<Link  className='flexItem' to='/NDContact'>Contact Us</Link>	
 		</div>
 	);
 }
@@ -81,8 +84,8 @@ function Information() {
 			<p>
 				The legal GVW on the <u>interstate highway system</u> is 80,000 pounds. An interstate permit is required when a vehicle hauling a reducible load exceeds 80,000 pounds GVW. The GVW shall not exceed 105,500 pounds. The vehicle combination must have sufficient axles and bridge lengths. All tire and axle weights must be legal. No tire shall exceed 550 pounds per inch of tire width, except on the steering axle. The weight on the steering axle shall be determined by the manufacturer’s <Modal img='/img/Axle_Rating.png'>axle rating</Modal> and shall not exceed 20,000 pounds. For more information on the interstate permit visit the <a href = 'http://www.nd.gov/ndhp/motor-carrier'>NDHP Motor Carrier</a> website.
 			</p>
-			<img alt='State Calculation Example' src={window.location.origin + '/img/State.png'} />
-			<img alt='Interstate Calculation Example' src={window.location.origin + '/img/Interstate.png'} />
+			<img alt='State Calculation Example' src={'img/State.PNG'} />
+			<img alt='Interstate Calculation Example' src={'img/Interstate.PNG'} />
 		</div>
 	);
 }

@@ -18,11 +18,14 @@ class MNHome extends React.Component {
 //informational links, TODO add more links
 function Resources() {
 	return (
-		<div>
-			<span className="collapsibleTree">Resources</span> <Link to='/MNContact'>Contact Us</Link>	
-				<ul>
-				<li><a href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>good stuff</a></li>
-			</ul>
+		<div class='flexRow'>
+			<div className="dropdown flexItem">
+				<span>Resources</span>
+					<div className='dropdown-content'>
+						<p><a href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>good stuff</a></p>
+					</div>
+			</div>
+			<Link className='flexItem' to='/MNContact'>Contact Us</Link>
 		</div>
 	);
 }
