@@ -8,7 +8,7 @@ class MNHome extends React.Component {
 			<div>
 				<Resources />
 				<RedirectDropDown />
-				<Link to='/MNInput'><button>Go to Calculator</button></Link>
+				<Link to='/MNCalculations'><button>Go to Calculator</button></Link>
 				<Information />
 			</div>
 		);
@@ -18,7 +18,7 @@ class MNHome extends React.Component {
 //informational links in css dropdown and contact link, TODO add more links
 function Resources() {
 	return (
-		<div class='flexRow'>
+		<div className='flexRow'>
 			<div className="dropdown flexItem">
 				<span>Resources</span>
 					<div className='dropdown-content'>

@@ -7,11 +7,9 @@ import {
 import State from '../Other/State';
 import MNHome from '../Minnesota/MNHome';
 import MNContact from '../Minnesota/MNContact';
-import MNInput from '../Minnesota/MNInput';
 import MNCalculations from '../Minnesota/MNCalculations';
 import NDHome from '../NorthDakota/NDHome';
 import NDContact from '../NorthDakota/NDContact';
-import NDInput from '../NorthDakota/NDInput';
 import NDCalculations from '../NorthDakota/NDCalculations';
 
 import './CSS/Main.css';
@@ -27,11 +25,9 @@ class Main extends React.Component {
 						<Route exact path='/' component={State} />
 						<Route path='/MN' component={MNHome} />
 						<Route path='/MNContact' component={MNContact} />
-						<Route path='/MNInput' component={MNInput} />
 						<Route path='/MNCalculations' component={MNCalculations} />
 						<Route path='/ND' component={NDHome} />
 						<Route path='/NDContact' component={NDContact} />
-						<Route path='/NDInput' component={NDInput} />
 						<Route path='/NDCalculation' component={NDCalculations} />
 					</div>
 

@@ -8,7 +8,7 @@ class NDHome extends React.Component {
 					<div>
 						<Resources />
 						<RedirectDropDown />
-						<Link to='/NDInput'><button>Go to Calculator</button></Link>
+						<Link to='/NDCalculations'><button>Go to Calculator</button></Link>
 						<Information />
 					</div>
 			);
