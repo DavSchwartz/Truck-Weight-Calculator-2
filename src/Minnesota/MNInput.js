@@ -23,11 +23,7 @@ class MNInput extends React.Component {
 	}
 
 	handleAxleDetailsButton() {
-		var newCurrentAxle = this.state.currentAxle+1;
-		this.setState({currentAxle:newCurrentAxle});
-		if (newCurrentAxle === this.state.truck.axleCount-1) {
-		return <Redirect to='/NDHome' />;
-		}
+		this.setState({currentAxle:this.state.currentAxle+1});
 	}
 	
 	handleChangeMetaTruckData(change) {
@@ -35,12 +31,16 @@ class MNInput extends React.Component {
 
 		let key = Object.keys(change)[0]; // identifier of truck property being changed
 		if (key === 'axleCount') { this.setState({currentAxle:0}) } // reset to 0 if axle count is reset
-		this.truck[key] = change[key];
+		truck[key] = change[key];
 
 		this.setState({truck:truck});
 	}
 	
 	render() {
+		if (this.state.currentAxle >= this.state.truck.axleCount-1) {
+			return <Redirect to='/MNCalculations' />;
+		}
+
 		return (
 			<div>
 				<Link to='/MN'><button>Return to MN Home Page</button></Link>
@@ -127,10 +127,13 @@ class AxleDetails extends React.Component {
 	}
 
 	handleAxleDetailsButton(event) {
+		this.props.handleAxleDetailsButton();
+	}
+
+	componentWillReceiveProps() {
 		if (this.props.currentAxle === this.props.truck.axleCount-2) {
 			this.setState({buttonText:'Calculate'}); // last button click will say 'Calculate' instead of 'Next'
 		}
-		this.props.handleAxleDetailsButton();
 	}
 
 	render() {
