@@ -1,18 +1,22 @@
 class Truck{
 	constructor() {
-		this.restriction = 'No Restriction';
-		this.axleCount = 5;
-		this.is10Ton = true;
-		this.is9Ton = true;
-		this.isRestricted = false;
+		this.restriction = 'No Restriction'; //restriction to display
+		this.axleCount = 5; // total number of axle
+		this.is10Ton = true; // true to display 10 Ton calculations
+		this.is9Ton = true; // true to display 9 Ton calculations
+		this.isRestricted = false; // true to display Restricted calculations
 		this.feet = [0, 8, 8, 8, 8, 8, 8, 8];
-		this.inches = [0, 0, 0, 0, 0, 0, 0, 0];
-		this.tireCount = [2, 4, 4, 4, 4, 4, 4, 4];
-		this.tireWidth = [11, 11, 11, 11, 11, 11, 11, 11];;
-		this.tireRating = [20000, 20000, 20000, 20000, 20000, 20000, 20000, 20000];
-		this.weightUnit = ['lbs.', 'lbs.', 'lbs.', 'lbs.', 'lbs.', 'lbs.', 'lbs.', 'lbs.'];
+		this.inches = [0, 0, 0, 0, 0, 0, 0, 0]; // distance from last axle to this axle, first is always 0
+		this.tireCount = [2, 4, 4, 4, 4, 4, 4, 4]; // single or double tires for each axle
+		this.tireWidth = [11, 11, 11, 11, 11, 11, 11, 11]; // width in inches or mm or tires
+		this.tireRating = [20000, 20000, 20000, 20000, 20000, 20000, 20000, 20000]; // rating in lbs or kg of tires
+		this.weightUnit = ['lbs.', 'lbs.', 'lbs.', 'lbs.', 'lbs.', 'lbs.', 'lbs.', 'lbs.']; // unit of weight for tire rating
 		this.steerable = ['Yes', 'No', 'No', 'No', 'No', 'No', 'No', 'No'];
 	}	
+
+	calculate() {
+		//TODO add calculations
+	}
 
 	/*
 	//OLD C# TRUCK VARIABLES

@@ -13,7 +13,7 @@ class State extends React.Component {
 	}
 }
 
-//state selection drop down to redirect
+//state selection drop down to redirect page
 class RedirectDropDown extends React.Component {
 	constructor(props) {
 		super(props);

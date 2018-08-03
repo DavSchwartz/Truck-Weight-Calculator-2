@@ -15,7 +15,7 @@ class NDHome extends React.Component {
 	}
 }
 
-//informational links
+//informational links in css dropdown and contact link
 function Resources() {
 	return (
 		<div class='flexRow'>
@@ -33,7 +33,7 @@ function Resources() {
 	);
 }
 
-//state selection drop down to redirect
+//state selection drop down to redirect page
 class RedirectDropDown extends React.Component {
 	constructor(props) {
 		super(props);
@@ -54,7 +54,7 @@ class RedirectDropDown extends React.Component {
 			<select onChange={ this.onChange } defaultValue='/ND' >
 				<option value=''>State</option>
 					<option value='/MN'>Minnesota</option>
-					<option value='/ND' defaultValue>North Dakota</option>
+					<option value='/ND'>North Dakota</option>
 			</select>
 		);
 	}
@@ -82,7 +82,7 @@ function Information() {
 				The legal gross vehicle weight (GVW) on ND <u>state highways</u> is 105,500 pounds unless otherwise posted. On all other highways the maximum GVW is 80,000 pounds unless designated for more, not to exceed 105,500 pounds. All tire and axle weights must be legal. No tire shall exceed 550 pounds per inch of tire width. 
 			</p>
 			<p>
-				The legal GVW on the <u>interstate highway system</u> is 80,000 pounds. An interstate permit is required when a vehicle hauling a reducible load exceeds 80,000 pounds GVW. The GVW shall not exceed 105,500 pounds. The vehicle combination must have sufficient axles and bridge lengths. All tire and axle weights must be legal. No tire shall exceed 550 pounds per inch of tire width, except on the steering axle. The weight on the steering axle shall be determined by the manufacturer’s <Modal img='/img/Axle_Rating.png'>axle rating</Modal> and shall not exceed 20,000 pounds. For more information on the interstate permit visit the <a href = 'http://www.nd.gov/ndhp/motor-carrier'>NDHP Motor Carrier</a> website.
+				The legal GVW on the <u>interstate highway system</u> is 80,000 pounds. An interstate permit is required when a vehicle hauling a reducible load exceeds 80,000 pounds GVW. The GVW shall not exceed 105,500 pounds. The vehicle combination must have sufficient axles and bridge lengths. All tire and axle weights must be legal. No tire shall exceed 550 pounds per inch of tire width, except on the steering axle. The weight on the steering axle shall be determined by the manufacturer’s <Modal img='img/Axle_Rating.PNG'>axle rating</Modal> and shall not exceed 20,000 pounds. For more information on the interstate permit visit the <a href = 'http://www.nd.gov/ndhp/motor-carrier'>NDHP Motor Carrier</a> website.
 			</p>
 			<img alt='State Calculation Example' src={'img/State.PNG'} />
 			<img alt='Interstate Calculation Example' src={'img/Interstate.PNG'} />
@@ -90,7 +90,7 @@ function Information() {
 	);
 }
 
-//creat modal, animated pop-up image
+//create modal, animated pop-up image
 class Modal extends React.Component {
 	constructor(props) {
 		super(props);

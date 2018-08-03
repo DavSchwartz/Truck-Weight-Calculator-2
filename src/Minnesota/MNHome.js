@@ -15,7 +15,7 @@ class MNHome extends React.Component {
 	}
 }
 
-//informational links, TODO add more links
+//informational links in css dropdown and contact link, TODO add more links
 function Resources() {
 	return (
 		<div class='flexRow'>
@@ -30,7 +30,7 @@ function Resources() {
 	);
 }
 
-//state selection drop down to redirect
+//state selection drop down to redirect page
 class RedirectDropDown extends React.Component {
 	constructor(props) {
 		super(props);
@@ -50,7 +50,7 @@ class RedirectDropDown extends React.Component {
 		return (
 			<select onChange={this.onChange} defaultValue='/MN' >
 				<option value=''>State</option>
-				<option value='/MN' defaultValue>Minnesota</option>
+				<option value='/MN'>Minnesota</option>
 				<option value='/ND'>North Dakota</option>
 			</select>
 		);
