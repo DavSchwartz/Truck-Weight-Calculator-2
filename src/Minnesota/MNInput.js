@@ -2,18 +2,13 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 
 class MNInput extends React.Component {
-	componentWillMount() { //reset currentAxle to 0 on re-render
-		this.props.resetCurrentAxle();
-	}
-
 	render() {
 		return (
 			<div>
 				<div className='flexRowMainContent'>
 					<span style={{width: '40%'}}></span> {/* left padding for content */}
 					<AxleDetails currentAxle={this.props.currentAxle} truck={this.props.truck}
-							handleChangeAxleDetails={this.props.handleChangeAxleDetails}
-							handleAxleDetailsButton={this.props.handleAxleDetailsButton} />
+							handleChangeAxleDetails={this.props.handleChangeAxleDetails} handleAxleDetailsButton={this.props.handleAxleDetailsButton}/>
 				</div>
 			</div>
 		);

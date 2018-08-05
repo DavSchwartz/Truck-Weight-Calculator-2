@@ -10,7 +10,6 @@ class MNCalculations extends React.Component {
 		super(props);
 		this.handleAxleDetailsButton = this.handleAxleDetailsButton.bind(this);
 		this.handleChangeAxleDetails = this.handleChangeAxleDetails.bind(this);
-		this.resetCurrentAxle = this.resetCurrentAxle.bind(this);
 		this.handleChangeMetaTruckData = this.handleChangeMetaTruckData.bind(this);
 		this.state = {currentAxle:0, truck: new Truck()}; // axles are indexed at zero
   }
@@ -19,17 +18,13 @@ class MNCalculations extends React.Component {
 		let truck = this.state.truck;
 		let key = Object.keys(change)[0]; // identifier of truck property being changed
 
-		// change.rightaxle: 0 is for left axle, and 1 is for right axle in the UI
+		// In change.rightaxle, 0 is for left axle, and 1 is for right axle in the UI
 		truck[key][this.state.currentAxle + change.rightAxle] = change[key];
 		this.setState({truck:truck});
 	}
 
 	handleAxleDetailsButton() {
 		this.setState({currentAxle:this.state.currentAxle+1}); //increase current axle when button is pressed
-	}
-
-	resetCurrentAxle() {
-		this.setState({currentAxle:0});
 	}
 	
 	handleChangeMetaTruckData(change) {
@@ -41,7 +36,7 @@ class MNCalculations extends React.Component {
 
 		this.setState({truck:truck});
 	}
-
+	
 	render() {
 		return (
 			<div>
@@ -63,8 +58,7 @@ class MNCalculations extends React.Component {
 								exact
 								path='/MNCalculations'
 								render={(props) => <MNInput {...props} currentAxle={this.state.currentAxle} truck={this.state.truck}
-								handleChangeAxleDetails={this.handleChangeAxleDetails} handleAxleDetailsButton={this.handleAxleDetailsButton}
-								resetCurrentAxle={this.resetCurrentAxle} />}
+								handleChangeAxleDetails={this.handleChangeAxleDetails} handleAxleDetailsButton={this.handleAxleDetailsButton} />}
 								/>
 						<Route
 								path='/MNCalculations/Output'
@@ -86,7 +80,7 @@ class MetaTruckData extends React.Component {
 
 	handleChange(event) {
 		const target = event.target;
-    	const value = (target.type === 'checkbox' ? target.checked : target.value); // return boolean for checkboxes
+    const value = (target.type === 'checkbox' ? target.checked : target.value); // return boolean for checkboxes
 		
 		let change = { [target.name] : value};
 		this.props.handleChangeMetaTruckData(change);
