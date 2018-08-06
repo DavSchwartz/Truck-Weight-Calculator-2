@@ -27,7 +27,7 @@ class RedirectDropDown extends React.Component {
 
 	render() {
 		if (this.state.redirect) { // redirect to chosen option
-			return <Redirect to={this.state.location} />;
+			return <Redirect push to={this.state.location} />;
 		}
 
 		return (

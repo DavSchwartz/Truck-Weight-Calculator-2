@@ -1,89 +1,79 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 
+// display form table to input axle details data
 class MNInput extends React.Component {
-	render() {
-		return (
-			<div>
-				<div className='flexRowMainContent'>
-					<span style={{width: '40%'}}></span> {/* left padding for content */}
-					<AxleDetails currentAxle={this.props.currentAxle} truck={this.props.truck}
-							handleChangeAxleDetails={this.props.handleChangeAxleDetails} handleAxleDetailsButton={this.props.handleAxleDetailsButton}/>
-				</div>
-			</div>
-		);
-	}
-}
-
-// display form table to input data for each axle
-class AxleDetails extends React.Component {
 	constructor(props) {
 		super(props);
 		this.handleChange = this.handleChange.bind(this);
 		this.state = {buttonText:'Next'};
 	}
 
-	handleChange(rightAxle, event) { // pass in 0 for left axle, and 1 for right
-		let change = { [event.target.name]:event.target.value, 'rightAxle':rightAxle};
-		this.props.handleChangeAxleDetails(change);
+	handleChange(leftOrRightaxle, event) { // pass in 0 for left axle, and 1 for right
+		let change = { [event.target.name]:event.target.value };
+		this.props.handleChangeAxleDetails(leftOrRightaxle, change);
 	}
-
-	componentWillReceiveProps() {
-		if (this.props.currentAxle === this.props.truck.axleCount-2) {
-			this.setState({buttonText:'Calculate'}); // last button click will say 'Calculate' instead of 'Next'
+	
+	// Update Next/Calculate button text based on number of axles
+	// last button click will say 'Calculate' instead of 'Next'
+	componentDidUpdate() {
+		if (this.props.currentAxle === this.props.truck.axleCount-2 && this.state.buttonText === 'Next') {
+			this.setState({buttonText:'Calculate'});
+		} else if(this.props.currentAxle !== this.props.truck.axleCount-2 && this.state.buttonText === 'Calculate') {
+			this.setState({buttonText:'Next'})
 		}
 	}
 
 	render() {
 		let truck = this.props.truck;
 		let currentAxle = this.props.currentAxle;
-
-		if (this.props.currentAxle === this.props.truck.axleCount-1) {
-			return <Redirect to='/MNCalculations/Output' />; //redirect to Output after last axle entry
-		}
 		
 		return(
 			<div>
-				{/* pass 0 into handleChange for left axle, and 1 for right axle */}
-				<FlexBoxRow class='flexItemAxleDetails'>{{
-						one: '',
-						two: <div>Axle {currentAxle+1}</div>,
-						three: <Modal img='img/AxleDist.png'>Distance</Modal>,
-						four: <div>Axle {currentAxle+2}</div>,
-						}}</FlexBoxRow>
-				<FlexBoxRow class='flexItemAxleDetails'>{{
-						one: '# of Tires',
-						two: <TireNumDropDown tireCount={truck.tireCount[currentAxle]} handleChange={this.handleChange.bind(this,0)}/>,
-						three: <div><FeetDropDown feet={truck.feet[currentAxle+1]} handleChange={this.handleChange.bind(this,1)}/>ft.
-								<br /><InchDropDown inches={truck.inches[currentAxle+1]} handleChange={this.handleChange.bind(this,1)}/>in.</div>,
-						four: <TireNumDropDown tireCount={truck.tireCount[currentAxle+1]} handleChange={this.handleChange.bind(this,1)}/>
-						}}</FlexBoxRow>
-				<FlexBoxRow class='flexItemAxleDetails'>{{
-						one: <Modal img='img/TireWidth1.PNG'>Tire<br />Width</Modal>,
-						two: <TireWidthDropDown tireWidth={truck.tireWidth[currentAxle]} handleChange={this.handleChange.bind(this,0)}/>,
-						three: '',
-						four: <TireWidthDropDown tireWidth={truck.tireWidth[currentAxle+1]} handleChange={this.handleChange.bind(this,1)}/>
-						}}</FlexBoxRow>
-				<FlexBoxRow class='flexItemAxleDetails'>{{
-						one: <Modal img='img/Axle_Rating.PNG'>Tire<br />Rating</Modal>,
-						two: <div><input className='tireRating' type='text' name='tireRating' value={truck.tireRating[currentAxle]} onChange={this.handleChange.bind(this,0)}/>
-								<WeightUnitDropDown weightUnit={truck.weightUnit[currentAxle]} handleChange={this.handleChange.bind(this,0)}/></div>,
-						three: '',
-						four: <div><input className='tireRating' type='text' name='tireRating' value={truck.tireRating[currentAxle+1]} onChange={this.handleChange.bind(this,1)}/>
-								<WeightUnitDropDown weightUnit={truck.weightUnit[currentAxle+1]} handleChange={this.handleChange.bind(this,1)}/></div>
-						}}</FlexBoxRow>
-				<FlexBoxRow class='flexItemAxleDetails'>{{
-						one: 'Steerable',
-						two: <SteerableDropDown steerable={truck.steerable[currentAxle]} handleChange={this.handleChange.bind(this,0)}/>,
-						three: '',
-						four: <SteerableDropDown steerable={truck.steerable[currentAxle+1]} handleChange={this.handleChange.bind(this,1)}/>
-						}}</FlexBoxRow>
-				<FlexBoxRow class='flexItemAxleDetails'>{{
-						one: '',
-						two: '',
-						three: <button onClick={this.props.handleAxleDetailsButton.bind()}>{this.state.buttonText}</button>, //bind handle method so it is not continously executed
-						four: ''
-						}}</FlexBoxRow>
+				<div className='flexRowMainContent'>
+					<span style={{width: '40%'}}></span> {/* left padding for content */}
+					<div>
+						{/* pass 0 into handleChange for left axle, and 1 for right axle */}
+						<FlexBoxRow class='flexItemAxleDetails'>{{
+								one: '',
+								two: <div>Axle {currentAxle+1}</div>,
+								three: <Modal img='img/AxleDist.png'>Distance</Modal>,
+								four: <div>Axle {currentAxle+2}</div>,
+								}}</FlexBoxRow>
+						<FlexBoxRow class='flexItemAxleDetails'>{{
+								one: '# of Tires',
+								two: <TireNumDropDown tireCount={truck.tireCount[currentAxle]} handleChange={this.handleChange.bind(this,0)}/>,
+								three: <div><FeetDropDown feet={truck.feet[currentAxle+1]} handleChange={this.handleChange.bind(this,1)}/>ft.
+										<br /><InchDropDown inches={truck.inches[currentAxle+1]} handleChange={this.handleChange.bind(this,1)}/>in.</div>,
+								four: <TireNumDropDown tireCount={truck.tireCount[currentAxle+1]} handleChange={this.handleChange.bind(this,1)}/>
+								}}</FlexBoxRow>
+						<FlexBoxRow class='flexItemAxleDetails'>{{
+								one: <Modal img='img/TireWidth1.PNG'>Tire<br />Width</Modal>,
+								two: <TireWidthDropDown tireWidth={truck.tireWidth[currentAxle]} handleChange={this.handleChange.bind(this,0)}/>,
+								three: '',
+								four: <TireWidthDropDown tireWidth={truck.tireWidth[currentAxle+1]} handleChange={this.handleChange.bind(this,1)}/>
+								}}</FlexBoxRow>
+						<FlexBoxRow class='flexItemAxleDetails'>{{
+								one: <Modal img='img/Axle_Rating.PNG'>Tire<br />Rating</Modal>,
+								two: <div><input className='tireRating' type='text' name='tireRating' value={truck.tireRating[currentAxle]} onChange={this.handleChange.bind(this,0)}/>
+										<WeightUnitDropDown weightUnit={truck.weightUnit[currentAxle]} handleChange={this.handleChange.bind(this,0)}/></div>,
+								three: '',
+								four: <div><input className='tireRating' type='text' name='tireRating' value={truck.tireRating[currentAxle+1]} onChange={this.handleChange.bind(this,1)}/>
+										<WeightUnitDropDown weightUnit={truck.weightUnit[currentAxle+1]} handleChange={this.handleChange.bind(this,1)}/></div>
+								}}</FlexBoxRow>
+						<FlexBoxRow class='flexItemAxleDetails'>{{
+								one: 'Steerable',
+								two: <SteerableDropDown steerable={truck.steerable[currentAxle]} handleChange={this.handleChange.bind(this,0)}/>,
+								three: '',
+								four: <SteerableDropDown steerable={truck.steerable[currentAxle+1]} handleChange={this.handleChange.bind(this,1)}/>
+								}}</FlexBoxRow>
+						<FlexBoxRow class='flexItemAxleDetails'>{{
+								one: '',
+								two: <button onClick={this.props.handleAxleDetailsButtonLast.bind()}>Last</button>, // bind handle method so it is not continously executed
+								three: <button onClick={this.props.handleAxleDetailsButtonNext.bind()}>{this.state.buttonText}</button>,
+								four: ''
+								}}</FlexBoxRow>
+					</div>
+				</div>
 			</div>
 		);
 	}

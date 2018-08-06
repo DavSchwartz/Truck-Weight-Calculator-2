@@ -18,7 +18,7 @@ class NDHome extends React.Component {
 //informational links in css dropdown and contact link
 function Resources() {
 	return (
-		<div class='flexRow'>
+		<div className='flexRow'>
 			<div className="dropdown flexItem">
 				<span>Resources</span>
 					<div className='dropdown-content'>
@@ -47,7 +47,7 @@ class RedirectDropDown extends React.Component {
 
 	render() {
 		if (this.state.redirect) { // redirect to chosen option
-			return <Redirect to={this.state.location} />;
+			return <Redirect push to={this.state.location} />;
 		}
 
 		return (

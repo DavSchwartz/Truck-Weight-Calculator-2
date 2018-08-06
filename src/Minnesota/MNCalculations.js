@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Route, Switch } from 'react-router-dom';
+import { Link, Route, Redirect } from 'react-router-dom';
 import Truck from '../Other/Truck';
 import MNInput from './MNInput';
 import MNOutput from './MNOutput';
@@ -8,23 +8,28 @@ import './CSS/MNCalculations.css';
 class MNCalculations extends React.Component {
 	constructor(props) {
 		super(props);
-		this.handleAxleDetailsButton = this.handleAxleDetailsButton.bind(this);
-		this.handleChangeAxleDetails = this.handleChangeAxleDetails.bind(this);
 		this.handleChangeMetaTruckData = this.handleChangeMetaTruckData.bind(this);
+		this.handleChangeAxleDetails = this.handleChangeAxleDetails.bind(this);
+		this.handleAxleDetailsButtonNext = this.handleAxleDetailsButtonNext.bind(this);
+		this.handleAxleDetailsButtonLast = this.handleAxleDetailsButtonLast.bind(this);
+		this.resetCurrentAxle = this.resetCurrentAxle.bind(this);
 		this.state = {currentAxle:0, truck: new Truck()}; // axles are indexed at zero
   }
 
-	handleChangeAxleDetails(change) {
+	handleChangeAxleDetails(leftOrRightaxle, change) {
 		let truck = this.state.truck;
 		let key = Object.keys(change)[0]; // identifier of truck property being changed
 
-		// In change.rightaxle, 0 is for left axle, and 1 is for right axle in the UI
-		truck[key][this.state.currentAxle + change.rightAxle] = change[key];
+		// leftOrRightaxle: 0 is for left axle, and 1 is for right axle in the UI
+		truck[key][this.state.currentAxle + leftOrRightaxle] = change[key];
 		this.setState({truck:truck});
 	}
 
-	handleAxleDetailsButton() {
-		this.setState({currentAxle:this.state.currentAxle+1}); //increase current axle when button is pressed
+	handleAxleDetailsButtonNext() {
+		this.setState((prevState) => ({ currentAxle: prevState.currentAxle + 1 })); // increase current axle when 'Next' button is pressed
+	}
+	handleAxleDetailsButtonLast() {
+		this.setState((prevState) => ({ currentAxle: prevState.currentAxle - 1 })); // decrease current axle when 'Last' button is pressed
 	}
 	
 	handleChangeMetaTruckData(change) {
@@ -36,13 +41,22 @@ class MNCalculations extends React.Component {
 
 		this.setState({truck:truck});
 	}
-	
+
+	resetCurrentAxle() {
+		this.setState({currentAxle:0});
+	}
+
 	render() {
+		// redirect after user inputs last axle. only on MNCalculation page
+		if (this.state.currentAxle === this.state.truck.axleCount-1 && this.props.location.pathname === '/MNCalculations') {
+			return <Redirect push to='/MNCalculations/Output' />;
+		}
+
 		return (
 			<div>
 				<Link to='/MN'><button>Return to MN Home Page</button></Link>
 
-				{/* use flex box so conent can collapse when page shrinks */}
+				{/* use flex box so content can collapse when page shrinks */}
 				<div className='flexRowMainContent'>
 					<span style={{width: '20%'}}></span> {/* left padding for content */}
 					<h2>Required Truck Information</h2>
@@ -52,20 +66,22 @@ class MNCalculations extends React.Component {
 					<span style={{width: '5%'}}></span> {/* left padding for content */}
 					<MetaTruckData truck={this.state.truck} handleChangeMetaTruckData={this.handleChangeMetaTruckData}/>
 				</div>
-
-					<Switch>
 						<Route
 								exact
 								path='/MNCalculations'
-								render={(props) => <MNInput {...props} currentAxle={this.state.currentAxle} truck={this.state.truck}
-								handleChangeAxleDetails={this.handleChangeAxleDetails} handleAxleDetailsButton={this.handleAxleDetailsButton} />}
+								render={(props) => <MNInput {...props}
+								currentAxle={this.state.currentAxle}
+								truck={this.state.truck}
+								handleChangeAxleDetails={this.handleChangeAxleDetails}
+								handleAxleDetailsButtonNext={this.handleAxleDetailsButtonNext}
+								handleAxleDetailsButtonLast={this.handleAxleDetailsButtonLast} />}
 								/>
 						<Route
 								path='/MNCalculations/Output'
-								component={MNOutput}
+								render={(props) => <MNOutput {...props}
+								truck={this.state.truck}
+								resetCurrentAxle={this.resetCurrentAxle} />}
 								/>
-					</Switch>
-
 			</div>
 		);
 	}

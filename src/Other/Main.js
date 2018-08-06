@@ -1,7 +1,7 @@
 import React from 'react';
 import {
 	Route,
-	HashRouter
+	HashRouter,
 } from 'react-router-dom';
 
 import State from '../Other/State';
