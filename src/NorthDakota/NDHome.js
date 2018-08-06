@@ -76,7 +76,7 @@ function Information() {
 				N = Number of axles in the group under consideration. 
 			</p>
 			<p>
-				<a href ='http://www.nd.gov/ndhp/sites/nd.gov.ndhp/files/docs/permits/Weight_Limitations_Chart.pdf'>NDHP Weight Limitations Chart.</a>
+				<a href ='https://www.nd.gov/ndhp/sites/www/files/documents/Permits/Weight_Limitations_Chart_.pdf'>NDHP Weight Limitations Chart.</a>
 			</p>
 			<p>
 				The legal gross vehicle weight (GVW) on ND <u>state highways</u> is 105,500 pounds unless otherwise posted. On all other highways the maximum GVW is 80,000 pounds unless designated for more, not to exceed 105,500 pounds. All tire and axle weights must be legal. No tire shall exceed 550 pounds per inch of tire width. 
