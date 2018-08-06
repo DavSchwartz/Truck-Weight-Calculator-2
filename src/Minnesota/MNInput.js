@@ -5,7 +5,7 @@ class MNInput extends React.Component {
 	constructor(props) {
 		super(props);
 		this.handleChange = this.handleChange.bind(this);
-		this.state = {buttonText:'Next'};
+		this.state = {buttonText:'Next', lastButtonVisibility:false};
 	}
 
 	handleChange(leftOrRightaxle, event) { // pass in 0 for left axle, and 1 for right
@@ -13,12 +13,19 @@ class MNInput extends React.Component {
 		this.props.handleChangeAxleDetails(leftOrRightaxle, change);
 	}
 	
-	// Update Next/Calculate button text based on number of axles
-	// last button click will say 'Calculate' instead of 'Next'
+	// Hide 'Last' button on currentAxle===0
+	// second button will change to 'Calculate' instead of 'Next' on final axle
 	componentDidUpdate() {
+		if (this.props.currentAxle === 0 && this.state.lastButtonVisibility === true) {
+			this.setState({lastButtonVisibility: false});
+		}
+		else if (this.props.currentAxle === 1 && this.state.lastButtonVisibility === false) {
+			this.setState({lastButtonVisibility: true});
+		}
 		if (this.props.currentAxle === this.props.truck.axleCount-2 && this.state.buttonText === 'Next') {
 			this.setState({buttonText:'Calculate'});
-		} else if(this.props.currentAxle !== this.props.truck.axleCount-2 && this.state.buttonText === 'Calculate') {
+		}
+		else if(this.props.currentAxle !== this.props.truck.axleCount-2 && this.state.buttonText === 'Calculate') {
 			this.setState({buttonText:'Next'})
 		}
 	}
@@ -68,7 +75,7 @@ class MNInput extends React.Component {
 								}}</FlexBoxRow>
 						<FlexBoxRow class='flexItemAxleDetails'>{{
 								one: '',
-								two: <button onClick={this.props.handleAxleDetailsButtonLast.bind()}>Last</button>, // bind handle method so it is not continously executed
+								two: <div>{this.state.lastButtonVisibility && <button onClick={this.props.handleAxleDetailsButtonLast.bind()}>Last</button>}</div>, // bind handle method so it is not continously executed
 								three: <button onClick={this.props.handleAxleDetailsButtonNext.bind()}>{this.state.buttonText}</button>,
 								four: ''
 								}}</FlexBoxRow>
