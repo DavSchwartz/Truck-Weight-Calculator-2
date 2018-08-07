@@ -23,7 +23,7 @@ function Resources() {
 				<span>Resources</span>
 					<div className='dropdown-content'>
 						<p><a href='http://www.ndltap.org/resources/truckweight.php'>NLDTAP Truck Weight Resources</a></p>
-						<p><a href='http://www.nd.gov/ndhp/motor-carrier/legal-vehicle-size-and-weight'>NDHP Vehicle Size and Weight</a></p>
+						<p><a href='https://www.nd.gov/ndhp/motor-carrier/legal-vehicle-size-and-weight'>NDHP Vehicle Size and Weight</a></p>
 						<p><a href='http://www.dot.nd.gov/business/motor-carrier.htm'>NDDOT Motor Carrier Services</a></p>
 						<p><a href='http://www.ugpti.org'>UGPTI</a></p>
 					</div>
