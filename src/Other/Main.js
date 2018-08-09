@@ -28,12 +28,12 @@ class Main extends React.Component {
 						<Route path='/MNCalculations' component={MNCalculations} />
 						<Route path='/ND' component={NDHome} />
 						<Route path='/NDContact' component={NDContact} />
-						<Route path='/NDCalculation' component={NDCalculations} />
+						<Route path='/NDCalculations' component={NDCalculations} />
 					</div>
 
 					<a href='http://www.ugpti.org/dotsc/' >
 						<img className='footer' alt='UGPTI-DOTSC Footer' src={'img/logo_DOTSC.jpg'} />
-					</ a>
+					</a>
 				</div>
 			</HashRouter>
 		);

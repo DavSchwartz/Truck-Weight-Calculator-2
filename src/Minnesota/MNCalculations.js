@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Route, Redirect } from 'react-router-dom';
-import Truck from '../Other/Truck';
+import MNTruck from '../Other/MNTruck';
 import MNInput from './MNInput';
 import MNOutput from './MNOutput';
 import './CSS/MNCalculations.css';
@@ -13,7 +13,7 @@ class MNCalculations extends React.Component {
 		this.handleAxleDetailsButtonNext = this.handleAxleDetailsButtonNext.bind(this);
 		this.handleAxleDetailsButtonLast = this.handleAxleDetailsButtonLast.bind(this);
 		this.resetCurrentAxle = this.resetCurrentAxle.bind(this);
-		this.state = {currentAxle:0, truck: new Truck()}; // axles are indexed at zero
+		this.state = {currentAxle:0, truck: new MNTruck()}; // axles are indexed at zero
   }
 
 	handleChangeAxleDetails(leftOrRightaxle, change) {
@@ -66,22 +66,22 @@ class MNCalculations extends React.Component {
 					<span style={{width: '5%'}}></span> {/* left padding for content */}
 					<MetaTruckData truck={this.state.truck} handleChangeMetaTruckData={this.handleChangeMetaTruckData}/>
 				</div>
-						<Route
-								exact
-								path='/MNCalculations'
-								render={(props) => <MNInput {...props}
-								currentAxle={this.state.currentAxle}
-								truck={this.state.truck}
-								handleChangeAxleDetails={this.handleChangeAxleDetails}
-								handleAxleDetailsButtonNext={this.handleAxleDetailsButtonNext}
-								handleAxleDetailsButtonLast={this.handleAxleDetailsButtonLast} />}
-								/>
-						<Route
-								path='/MNCalculations/Output'
-								render={(props) => <MNOutput {...props}
-								truck={this.state.truck}
-								resetCurrentAxle={this.resetCurrentAxle} />}
-								/>
+				<Route
+						exact
+						path='/MNCalculations'
+						render={(props) => <MNInput {...props}
+						currentAxle={this.state.currentAxle}
+						truck={this.state.truck}
+						handleChangeAxleDetails={this.handleChangeAxleDetails}
+						handleAxleDetailsButtonNext={this.handleAxleDetailsButtonNext}
+						handleAxleDetailsButtonLast={this.handleAxleDetailsButtonLast} />}
+						/>
+				<Route
+						path='/MNCalculations/Output'
+						render={(props) => <MNOutput {...props}
+						truck={this.state.truck}
+						resetCurrentAxle={this.resetCurrentAxle} />}
+						/>
 			</div>
 		);
 	}
@@ -105,29 +105,24 @@ class MetaTruckData extends React.Component {
 	render() {
 		return (
 			<div>
-
 				<FlexBoxRow class='flexItemAxleCount'>{{
 						one: 'State:',
 						two: 'Minnesota'
 						}}</FlexBoxRow>
-
 				<FlexBoxRow class='flexItemAxleCount'>{{
 						one: 'Select Type of Restriction:',
 						two: <RestrictionDropDown restriction={this.props.truck.restriction} handleChange={this.handleChange}/>
 						}}</FlexBoxRow>
-
 				<FlexBoxRow class='flexItemAxleCount'>{{
 						one: 'Axle Count:',
 						two: <AxleCountDropDown axleCount={this.props.truck.axleCount} handleChange={this.handleChange}/>
 						}}</FlexBoxRow>
-
 				<FlexBoxRow class='flexItemCheckBox'>{{
 						one: 'Calculations:',
 						two: <div>10 Ton:<input name='is10Ton' type='checkbox' checked={this.props.truck.is10Ton} onChange={this.handleChange} /></div>,
 						three: <div>9 Ton:<input name='is9Ton' type='checkbox' checked={this.props.truck.is9Ton} onChange={this.handleChange} /></div>,
 						four: <div>Restricted:<input name='isRestricted' type='checkbox' checked={this.props.truck.isRestricted} onChange={this.handleChange} /></div>
 						}}</FlexBoxRow>
-
 			</div>
 		)
 	}
@@ -165,7 +160,7 @@ function RestrictionDropDown(props) {
 
 function AxleCountDropDown(props) {
 	return(
-		// !!WARNING!! default values for axles are set in Truck.js. If max axleCount is increased, set the cooresponding values in Truck.js
+		// !!WARNING!! default values for axles are set in MNTruck.js. If max axleCount is increased, set the cooresponding values in MNTruck.js
 		<select name='axleCount' value={props.axleCount} onChange={props.handleChange}>
 			<option value={8}>8</option>
 			<option value={7}>7</option>

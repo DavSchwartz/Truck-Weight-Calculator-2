@@ -1,16 +1,17 @@
-class Truck{
+class NDTruck{
 	constructor() {
 		this.restriction = 'No Restriction'; //restriction to display
 		this.axleCount = 5; // total number of axle
-		this.is10Ton = true; // true to display 10 Ton calculations
-		this.is9Ton = true; // true to display 9 Ton calculations
+		this.isInterstate = true; // true to display Interstate Highway calculations
+		this.isState = false; // true to display State Highwat calculations
+		this.isPrimaryNetwork = false; // true to display Primary Network calculations
 		this.isRestricted = false; // true to display Restricted calculations
+		this.steeringRating = 20000; // rating in lbs or kg of steering tire
+		this.weightUnit = 'lbs.'; // unit of weight for steering rating
 		this.feet = [0, 8, 8, 8, 8, 8, 8, 8];
 		this.inches = [0, 0, 0, 0, 0, 0, 0, 0]; // distance from last axle to this axle, first is always 0
 		this.tireCount = [2, 4, 4, 4, 4, 4, 4, 4]; // single or double tires for each axle
 		this.tireWidth = [11, 11, 11, 11, 11, 11, 11, 11]; // width in inches or mm or tires
-		this.tireRating = [20000, 20000, 20000, 20000, 20000, 20000, 20000, 20000]; // rating in lbs or kg of tires
-		this.weightUnit = ['lbs.', 'lbs.', 'lbs.', 'lbs.', 'lbs.', 'lbs.', 'lbs.', 'lbs.']; // unit of weight for tire rating
 		this.steerable = ['Yes', 'No', 'No', 'No', 'No', 'No', 'No', 'No'];
 
 		this.axleGroups = {};
@@ -221,4 +222,4 @@ class Truck{
 
 }
 
-export default Truck;
+export default NDTruck;
