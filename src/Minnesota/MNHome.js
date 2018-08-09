@@ -22,7 +22,8 @@ function Resources() {
 			<div className="dropdown flexItem">
 				<span>Resources</span>
 					<div className='dropdown-content'>
-						<p><a href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'> TODO STILL NEED TO ADD MORE RESOURCES</a></p>
+						<p><a href='https://www.alextech.edu/customized-training/truck-weight-continuing-education'>ATCC Truck Weight Resources</a></p>
+						<p><a href='http://www.ugpti.org'>UGPTI</a></p>
 					</div>
 			</div>
 			<Link className='flexItem' to='/MNContact'>Contact Us</Link>
