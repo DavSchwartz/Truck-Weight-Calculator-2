@@ -14,7 +14,8 @@ class MNTruck{
 		this.steerable = ['Yes', 'No', 'No', 'No', 'No', 'No', 'No', 'No'];
 
 		this.axleGroups = {};
-		this.axleGroups.weight = [];
+		this.axleGroups.weight10Ton = [];
+		this.axleGroups.weight9Ton = [];
 		this.axleGroups.startAxle = [];
 		this.axleGroups.endAxle = [];
 		this.axleGroups.numAxles = []; // TODO IS THIS ARRAY NECCESARY?
@@ -22,7 +23,8 @@ class MNTruck{
 		this.axleGroups.tireWidth = []; // TODO IS THIS ARRAY NECCESARY?
 
 		this.bridges = {};
-		this.bridges.weight = [];
+		this.bridges.weight10Ton = [];
+		this.bridges.weight9Ton = [];
 		this.bridges.startAxle = [];
 		this.bridges.endAxle = [];
 	}	
@@ -54,9 +56,9 @@ class MNTruck{
 
 	//calculate bridge weights based on federal formula with exceptions for MN 10 Ton roads
 	calculateBridgeWeights() {
-		let exteriorLength = this.getDistBetweenAxlesInFeet(0,this.axleCount-1);
 		let bridges = {};
-		bridges.weights = [];
+		bridges.weights10Ton = [];
+		bridges.weights9Ton = [];
 		bridges.startAxle = [];
 		bridges.endAxle = [];
 
@@ -65,7 +67,8 @@ class MNTruck{
 		let counter = 0;
 		for (let i=0; i<this.axleCount; ++i) {
 			for (let j=i+1; j<this.axleCount; ++j) {
-				bridges.weight[counter] = bridgeFormula(i,j);
+				bridges.weight10Ton[counter] = bridgeFormula(i, j);
+				bridges.weight9Ton[counter] = exceptions9Ton(i, j, bridges.weight10Ton[counter]);
 				bridges.startAxle[counter] = i;
 				bridges.endAxle[counter] = j;
 				++counter;
@@ -75,50 +78,94 @@ class MNTruck{
 		return bridges;
 
 		function bridgeFormula(axle1, axle2) {
-			let L = Math.round(this.getDistBetweenAxlesInFeet(axle1, axle2)); // Length in feet, rounded up
+			let originalLength = this.getDistBetweenAxlesInFeet(axle1, axle2);
+			let L = Math.round(originalLength); // Length in feet, rounded away from zero
 			let N = axle2 - axle1 + 1; // Number of axles
-			let W = 500 * Math.ceil( (L*N)/(N-1) + 12*N + 36 ) // Bridge Formula, calculates Weight
+			let W = (L*N)/(N-1) + 12*N + 36 // Bridge Formula, will be multiplied by 500 later
 
-			// exception on federal formula for MN axle weight limit table
-			// 2 and 3 axle
-			if ((N === 2 || N === 3) && exteriorLength <= 8)
-			{
-					W = 34000;
-			}
-			//8+ values
-			else if (N===2 && exteriorLength < 9) {
-				W = 38000;
-			}
-			else if (N===3 && exteriorLength < 9) {
-				W = 42000;
-			}
-			// 4 axle: starting with L==46, every 3rd axle must be decreased by 500
-			else if (N === 4 && L > 45 && ((L - 46) % 3 === 0))
-			{
-				W -= 500;
-			}
-			// 5 axle: every 4th starting with L==53, and every 4th starting with L==54 must be decreased by 500
-			else if (N === 5 && L > 52 && (((L - 53) % 4 === 0) || ((L - 54) % 4 === 0)))
-			{
-				W -= 500;
-			}
-			// 6 axle: every 5th starting with L==46 and every 5th starting at L==47 must be decreased by 500
-			else if (N === 6 && L > 45 && (((L - 46) % 5 === 0) || ((L - 47) % 5 === 0)))
-			{
-				W -= 500;
-			}
-			// 7 axle: starting with L==37, every other group of 3 and when L==64 must be decrease by 500
-			else if (N === 7 && L > 36 && ( L === 64 || (((L - 37) % 6 === 0) || ((L - 38) % 6 === 0) || ((L - 39) % 6 === 0))))
-			{
-				W -= 500;
-			}
-			// 8 axle: every 7th starting with L==46, every 7th starting with L==47, every 7th starting with L==48 and when L==74 must be decreased by 500
-			else if (N === 8 && L > 35 && ( L === 74 || (((L - 36) % 7 === 0) || ((L - 37) % 7 === 0) || ((L - 38) % 7 === 0))))
-			{
-				W -= 500;
+			// exceptions
+			switch (N) {
+				case 2:
+					if (originalLength >= 9) {
+						// floor, celing, rounding away from zero, and rounding towards zero works
+						W = Math.ceil(W);
+					}
+					else if (originalLength <= 8) {
+						W = 68; // 68*500 = 34,000
+					}
+					else { // 8+ values
+						W = 76; // 76*500 = 38,000
+					}
+					break;
+				case 3:
+					if (originalLength >= 9) {
+						// celing and rounding away from zero works
+						W = Math.ceil(W);
+					}
+					else if (originalLength <= 8) {
+						W = 68; // 68*500 = 34,000
+					}
+					else { // 8+ values
+						W = 84; // 84*500 = 42,000
+					}
+					break;
+				case 4:
+					// rounding away from zero and rounding towards zero works
+					if (L >= 44) {
+						W = roundTowardsZero(W);
+					}
+					else if (L <= 45) {
+						W = Math.ceil(W);
+					}
+					break;
+				case 5:
+					if (L >= 51) {
+						W = roundTowardsZero(W);
+					}
+					else if (L <= 52) {
+						W = Math.ceil(W);
+					}
+					break;
+				case 6:
+					// rounding away from zero and rounding towards zero works
+					if (L >= 43) {
+						W = roundTowardsZero(W);
+					}
+					else if (L <= 45) {
+						W = Math.ceil(W);
+					}
+					break;
+				case 7:
+					if (L === 64) {
+						W = 194; // 194*500 = 97,000
+					}
+					else if (L >= 34) {
+						W = roundTowardsZero(W);
+					}
+					else if (L <= 36) {
+						W = Math.ceil(W);
+					}
+					break;
+				case 8:
+					if (L === 74) {
+						W = 216; // 216*500 = 108,000
+					}
+					// rounding away from zero and rounding towards zero works
+					else if (L >= 32) {
+						W = roundTowardsZero(W);
+					}
+					else if(L <= 35) {
+						W = Math.ceil(W);
+					}
+					break;
+				default:
+					W = roundTowardsZero(W);
+					break;
 			}
 
-			let cap=0;
+			W = W*500;
+
+			let cap;
 			// MN caps on weight based on axle count
 			switch (N)
 			{
@@ -147,46 +194,38 @@ class MNTruck{
 
 			W = Math.min(W,cap);
 			return W;
-		}
-	}
 
-	//apply 9 Ton road exceptions to bridge weight values
-	bridgeWeightExceptions9Ton(bridges) {
-		let exteriorLength = this.getDistBetweenAxlesInFeet(0,this.axleCount-1);
-		// iterate through all combinations of axles to apply 9Ton exceptions
-		let counter = 0;
-		for (let i=0; i<this.axleCount; ++i) {
-			for (let j=i+1; j<this.axleCount; ++j) {
-				bridges.weight[counter] = exceptions9Ton(bridges.weight[counter], i, j);
-				++counter;
+			// round down for midpoints, otherwise round normally
+			function roundTowardsZero(x) {
+				if ((x - .5) === Math.floor(x)) { // check if it is a midpoint
+					return Math.floor(x);
+				}
+				else {
+					return Math.round(x);
+				}
 			}
 		}
 
-		return bridges;
-
-		function exceptions9Ton(weight, axle1, axle2) {
-			let L = Math.round(this.getDistBetweenAxlesInFeet(axle1, axle2)); // Length in feet, rounded up
+		// exceptions on formula for 9 Ton
+		function exceptions9Ton(axle1, axle2, W) {
+			let originalLength = this.getDistBetweenAxlesInFeet(axle1, axle2); // Length in feet, rounded up
+			let L = Math.round(originalLength);
 			let N = axle2 - axle1 + 1; // Number of axles
-			let W = weight;
 
-			// exception on federal formula for MN axle weight limit table, 9 Ton roads only
-			if (N===2)
-			{
-				if (exteriorLength < 9) { // 8+ values
+			if (N===2) {
+				if (originalLength > 8 && originalLength < 9) { // 8+ values
 					W = 34000;
 				}
-				else if (L===9)
-				{
+				else if (L === 9) {
 					W = 35000;
 				}
-				else if (L===10)
-				{
+				else if (L === 10) {
 					W = 36000;
 				}
 			}
 
-			let cap = 0;
-			// MN caps on weight based on axle count, 9 Ton roads only
+			let cap=0;
+			// MN caps on weight based on axle count
 			switch (N)
 			{
 				case 2:
@@ -205,8 +244,9 @@ class MNTruck{
 			}
 
 			W = Math.min(W,cap);
-			return W;
+			return W;	
 		}
+
 	}
 
 	getDistBetweenAxlesInFeet(axle1, axle2) {

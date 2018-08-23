@@ -19,7 +19,7 @@ class NDHome extends React.Component {
 function Resources() {
 	return (
 		<div className='flexRow'>
-			<div className="dropdown flexItem">
+			<div className='dropdown flexItem'>
 				<span>Resources</span>
 					<div className='dropdown-content'>
 						<p><a href='http://www.ndltap.org/resources/truckweight.php'>NLDTAP Truck Weight Resources</a></p>
@@ -28,7 +28,7 @@ function Resources() {
 						<p><a href='http://www.ugpti.org'>UGPTI</a></p>
 					</div>
 			</div>
-			<Link  className='flexItem' to='/NDContact'>Contact Us</Link>	
+			<Link className='flexItem' to='/NDContact'>Contact Us</Link>	
 		</div>
 	);
 }

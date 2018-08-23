@@ -7,9 +7,8 @@ class MNContact extends React.Component {
 		return (
 			<div>
 				<Link to='/MN'><button>Return to Minnesota Home Page</button></Link>
-				<p>TODO STILL NEED TO ADD CONTACTS</p>
-				<p>Contact for weight calculations: {/*<a href="mailto:JohnDoe@nd.gov">*/}e-mail here{/*</a>*/} , phone number here, (701) 123-4567</p>
-				<p>Contact for application questions and feedback: {/*<a href="mailto:JaneDoe@ugpti.org">*/}e-mail here{/*</a>*/}.</p>
+				<p>MSP Commercial Contact: <a href="mailto:cmvinfo@state.mn.us">cmvinfo@state.mn.us</a> , 651-405-6196</p>
+				<p>ATCC contact: <a href="mailto:truckweight@alextech.edu">truckweight@alextech.edu</a></p>
 			</div>
 		);
 	}
