@@ -12,6 +12,8 @@ import NDHome from '../NorthDakota/NDHome';
 import NDContact from '../NorthDakota/NDContact';
 import NDCalculations from '../NorthDakota/NDCalculations';
 
+import './CSS/Calculations.css';
+import './CSS/Home.css';
 import './CSS/Main.css';
 
 class Main extends React.Component {

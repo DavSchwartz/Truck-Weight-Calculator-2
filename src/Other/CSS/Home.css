@@ -1,3 +1,7 @@
+.imageND {
+	width: 40%;
+}
+
 .flexRow {
 	display: flex;
 }

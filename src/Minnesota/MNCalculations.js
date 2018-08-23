@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link, Route, Redirect } from 'react-router-dom';
-import MNTruck from '../Other/MNTruck';
+import MNTruck from './MNTruck';
 import MNInput from './MNInput';
 import MNOutput from './MNOutput';
-import './CSS/MNCalculations.css';
 
 class MNCalculations extends React.Component {
 	constructor(props) {

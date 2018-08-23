@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import './CSS/MNContact.css';
 
 class MNContact extends React.Component {
 	render() {

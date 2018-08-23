@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import './CSS/NDContact.css';
 
 class NDContact extends React.Component {
 	render() {

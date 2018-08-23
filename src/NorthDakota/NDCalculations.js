@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link, Route, Redirect } from 'react-router-dom';
-import NDTruck from '../Other/NDTruck';
+import NDTruck from './NDTruck';
 import NDInput from './NDInput';
 import NDOutput from './NDOutput';
-import './CSS/NDCalculations.css';
 
 class NDCalculations extends React.Component {
 	constructor(props) {

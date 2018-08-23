@@ -1,0 +1,28 @@
+.flexRowMainContent {
+	display: flex;
+}
+
+.flexRowInput {
+	display: flex;
+}
+
+.flexItemAxleCount {
+	padding: 5px 0px 5px 0px;
+	width: 120px;
+}
+
+.flexItemCheckBox {
+	padding: 0px 0px 0px 0px;
+	width: 90px;
+}
+
+/*****INPUT PAGE*****/
+.txtBox {
+	width: 45px;
+}
+
+.flexItemAxleDetails {
+	padding: 5px 0px 5px 0px;
+	width: 80px;
+}
+/***** END INPUT PAGE *****/
