@@ -15,7 +15,9 @@ class NDTruck{
 		this.steerable = ['Yes', 'No', 'No', 'No', 'No', 'No', 'No', 'No'];
 
 		this.axleGroups = {};
-		this.axleGroups.weight = [];
+		this.axleGroups.weightInterstate = [];
+		this.axleGroups.weightState = [];
+		this.axleGroups.weightPrimary = [];
 		this.axleGroups.startAxle = [];
 		this.axleGroups.endAxle = [];
 		this.axleGroups.numAxles = []; // TODO IS THIS ARRAY NECCESARY?
@@ -55,7 +57,6 @@ class NDTruck{
 
 	//calculate bridge weights based on federal formula with exceptions for MN 10 Ton roads
 	calculateBridgeWeights() {
-		let exteriorLength = this.getDistBetweenAxlesInFeet(0,this.axleCount-1);
 		let bridges = {};
 		bridges.weights = [];
 		bridges.startAxle = [];
@@ -76,51 +77,25 @@ class NDTruck{
 		return bridges;
 
 		function bridgeFormula(axle1, axle2) {
-			let L = Math.round(this.getDistBetweenAxlesInFeet(axle1, axle2)); // Length in feet, rounded up
+			let L = Math.floor(this.getDistBetweenAxlesInFeet(axle1, axle2)); // Length in feet, truncated
 			let N = axle2 - axle1 + 1; // Number of axles
-			let W = 500 * Math.ceil( (L*N)/(N-1) + 12*N + 36 ) // Bridge Formula, calculates Weight
+			let W = 500 * Math.round( (L*N)/(N-1) + 12*N + 36 ) // Bridge Formula, calculates Weight
 
-			// exception on federal formula for MN axle weight limit table
-			// 2 and 3 axle
-			if ((N === 2 || N === 3) && exteriorLength <= 8)
+			//exceptions
+			if ((N===2 || N===3) && L<8)
 			{
-					W = 34000;
+				W = 34000;
 			}
-			//8+ values
-			else if (N===2 && exteriorLength < 9) {
-				W = 38000;
-			}
-			else if (N===3 && exteriorLength < 9) {
-				W = 42000;
-			}
-			// 4 axle: starting with L==46, every 3rd axle must be decreased by 500
-			else if (N === 4 && L > 45 && ((L - 46) % 3 === 0))
+			//"Two consecutive sets of tandem axles may carry a gross load of 34K pounds 
+			//each provided the overall distance between the first and last axles of such consecutive
+			//sets of tandem axles is 36 feet or more."
+			else if (N == 4 && L < 40 && L > 35)
 			{
-				W -= 500;
-			}
-			// 5 axle: every 4th starting with L==53, and every 4th starting with L==54 must be decreased by 500
-			else if (N === 5 && L > 52 && (((L - 53) % 4 === 0) || ((L - 54) % 4 === 0)))
-			{
-				W -= 500;
-			}
-			// 6 axle: every 5th starting with L==46 and every 5th starting at L==47 must be decreased by 500
-			else if (N === 6 && L > 45 && (((L - 46) % 5 === 0) || ((L - 47) % 5 === 0)))
-			{
-				W -= 500;
-			}
-			// 7 axle: starting with L==37, every other group of 3 and when L==64 must be decrease by 500
-			else if (N === 7 && L > 36 && ( L === 64 || (((L - 37) % 6 === 0) || ((L - 38) % 6 === 0) || ((L - 39) % 6 === 0))))
-			{
-				W -= 500;
-			}
-			// 8 axle: every 7th starting with L==46, every 7th starting with L==47, every 7th starting with L==48 and when L==74 must be decreased by 500
-			else if (N === 8 && L > 35 && ( L === 74 || (((L - 36) % 7 === 0) || ((L - 37) % 7 === 0) || ((L - 38) % 7 === 0))))
-			{
-				W -= 500;
+				W = 68000;
 			}
 
-			let cap=0;
-			// MN caps on weight based on axle count
+			let cap = 0;
+
 			switch (N)
 			{
 				case 2:
@@ -133,80 +108,14 @@ class NDTruck{
 					cap = 80000;
 					break;
 				case 5:
-					cap = 85500;
-					break;
-				case 6:
-					cap = 90000;
-					break;
-				case 7:
-					cap = 97000;
+					cap = 100000;
 					break;
 				default:
-					cap = 108000; // 8 axles: most weight any bridge can carry
+					cap = 105500;
 					break;
 			}
 
-			W = Math.min(W,cap);
-			return W;
-		}
-	}
-
-	//apply 9 Ton road exceptions to bridge weight values
-	bridgeWeightExceptions9Ton(bridges) {
-		let exteriorLength = this.getDistBetweenAxlesInFeet(0,this.axleCount-1);
-		// iterate through all combinations of axles to apply 9Ton exceptions
-		let counter = 0;
-		for (let i=0; i<this.axleCount; ++i) {
-			for (let j=i+1; j<this.axleCount; ++j) {
-				bridges.weight[counter] = exceptions9Ton(bridges.weight[counter], i, j);
-				++counter;
-			}
-		}
-
-		return bridges;
-
-		function exceptions9Ton(weight, axle1, axle2) {
-			let L = Math.round(this.getDistBetweenAxlesInFeet(axle1, axle2)); // Length in feet, rounded up
-			let N = axle2 - axle1 + 1; // Number of axles
-			let W = weight;
-
-			// exception on federal formula for MN axle weight limit table, 9 Ton roads only
-			if (N===2)
-			{
-				if (exteriorLength < 9) { // 8+ values
-					W = 34000;
-				}
-				else if (L===9)
-				{
-					W = 35000;
-				}
-				else if (L===10)
-				{
-					W = 36000;
-				}
-			}
-
-			let cap = 0;
-			// MN caps on weight based on axle count, 9 Ton roads only
-			switch (N)
-			{
-				case 2:
-					cap = 36000;
-					break;
-				case 3:
-					cap = 54000;
-					break;
-				case 4:
-					cap = 72000;
-					break;
-				// TODO SHOULD THIS VALUE BE 80,000?
-				default:
-					cap = 108000 // most weight any bridge can carry
-					break;
-			}
-
-			W = Math.min(W,cap);
-			return W;
+			return Math.min(W, cap);
 		}
 	}
 
